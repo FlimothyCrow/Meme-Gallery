@@ -1,22 +1,20 @@
-import logo from "./logo.svg"
-import drums from "./img/drums.jpg"
 import "./App.css"
+
+const memesText = "memes"
+
+// create button that hides or reveals drum img
+
+// create input form that saves "username" to state date
+// click event triggers usernameVerifier()
+// if it passes, set input to state data
+// if not, error state, try again
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={drums} className="App-logo" alt="logo" />
-                <img src={logo} className="App-logo" alt="logo" />
-                <a
-                    className="App-link"
-                    href="https://www.youtube.com/watch?v=aOHi8dJdUbI"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Click for spicy drums
-                </a>
-            </header>
+        <div className="container">
+            <h1>Reactivity test</h1>
+            <h2>print out {memesText}</h2>
+            <h2>is memes true? {memesText ? "yes" : "no"}</h2>
         </div>
     )
 }
