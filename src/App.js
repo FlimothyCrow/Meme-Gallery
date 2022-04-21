@@ -1,4 +1,5 @@
 import "./App.css"
+import Header from "./components/Header"
 
 const memesText = "memes"
 
@@ -12,11 +13,15 @@ const memesText = "memes"
 function App() {
     return (
         <div className="container">
-            <h1>Reactivity test</h1>
+            <Header title="things" />
             <h2>print out {memesText}</h2>
             <h2>is memes true? {memesText ? "yes" : "no"}</h2>
         </div>
     )
+}
+
+Header.defaultProps = {
+    title: "placeholder title",
 }
 
 export default App
