@@ -1,9 +1,10 @@
 import "./App.css"
 import Header from "./components/Header"
 import Tasks from "./components/Tasks"
+import AddTaskForm from "./components/AddTaskForm"
 import { useState } from "react"
 
-const memesText = "memes"
+const taskText = "Task scheduler"
 
 // create button that hides or reveals drum img
 
@@ -13,6 +14,7 @@ const memesText = "memes"
 // if not, error state, try again
 
 function App() {
+    const [showAddTask, setShowAddTask] = useState(false)
     const [arrayOfTasks, setTasks] = useState([
         {
             id: 1,
@@ -34,12 +36,40 @@ function App() {
         },
     ])
 
+    // add task
+    const addTask = (taskObject) => {
+        const id = arrayOfTasks.length + 1
+        const newTask = { id, ...taskObject }
+        console.log(id)
+        setTasks([...arrayOfTasks, newTask])
+    }
+
+    // task deleter
+    const deleteTask = (id) => {
+        console.log(id, " deleted")
+        setTasks(arrayOfTasks.filter((taskObject) => taskObject.id !== id))
+    }
+
+    // task reminder toggle
+    const toggleReminder = (id) => {
+        setTasks(
+            arrayOfTasks.map((taskObject) =>
+                taskObject.id === id ? { ...taskObject, reminder: !taskObject.reminder } : taskObject
+            )
+        )
+    }
+
     return (
         <div className="container">
-            <Header title="things" />
-            <h2>print out {memesText}</h2>
-            <h2>is memes true? {memesText ? "yes" : "no"}</h2>
-            <Tasks arrayOfTasks={arrayOfTasks} />
+            <Header onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask} />
+            {showAddTask && <AddTaskForm onAdd={addTask} />}
+            <h2>print out {taskText}</h2>
+            <h2>is conditional true? {taskText ? "yes" : "no"}</h2>
+            {arrayOfTasks.length > 0 ? (
+                <Tasks arrayOfTasks={arrayOfTasks} onDelete={deleteTask} onToggle={toggleReminder} />
+            ) : (
+                "No current tasks"
+            )}
         </div>
     )
 }

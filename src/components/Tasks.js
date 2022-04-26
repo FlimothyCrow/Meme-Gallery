@@ -1,8 +1,10 @@
-export const Tasks = ({ arrayOfTasks }) => {
+import Task from "./Task"
+
+export const Tasks = ({ arrayOfTasks, onDelete, onToggle }) => {
     return (
         <>
             {arrayOfTasks.map((taskObject) => (
-                <h3 key={taskObject.id}>{taskObject.text}</h3>
+                <Task key={taskObject.id} taskObject={taskObject} onDelete={onDelete} onToggle={onToggle} />
             ))}
         </>
     )
